@@ -6,17 +6,37 @@ double convertFahrToCelsius(const double fahrTemp)
     return (5.0/9.0) * (fahrTemp - 32.0);
 }
 
+void printPlusMinusLineOfLength(int length)
+{
+    const char plus = '+';
+    const char minus = '-';
+
+    char currChar = plus;
+    for (int i = 0 ; i < length ; ++i)
+    {
+        printf("%c", currChar);
+
+        currChar == plus ? (currChar = minus) : (currChar = plus);
+    }
+    printf("\n");
+}
+
 void printFahrToCelsiusCoversionInRange(const double startingTempFahr, const double endTempFahr, const double tempStep)
 {
     double currTempFahr = startingTempFahr;
-    printf("Fahr\tCelsius\n");
+    printf("Fahrenheit    Celsius\n");
+
+    const int borderLineLength = 23;
+    printPlusMinusLineOfLength(borderLineLength);
+
     while (currTempFahr < endTempFahr)
     {
         const double currTempCelsius = convertFahrToCelsius(currTempFahr);
-        printf("%6.2f\t%6.2f\n", currTempFahr, currTempCelsius);
+        printf("|%10.2f |%8.2f |\n", currTempFahr, currTempCelsius);
 
         currTempFahr += tempStep;
     }
+    printPlusMinusLineOfLength(borderLineLength);
 }
 
 int main()
